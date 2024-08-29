@@ -123,7 +123,7 @@ export default locations = [
     },
 ]
 
-const gpsLocation = [29.959637803569084, -90.0649313356797]
+// const gpsLocation = [29.959637803569084, -90.0649313356797]
 
 const whereIsBenny = (gpsLocation) => {
     bennysLocation = locations.find((location) => {
@@ -147,10 +147,6 @@ const isInLocation = (corners, gpsLocation) => {
     const slope4 = getSlope(corner4, corner1)
     const latAtGPSLng4 = corner4[1] + (corner4[0] - gpsLocation[0])*slope4
     const aboveLine4 = latAtGPSLng4 > gpsLocation[1]
-    // console.log(aboveLine1)
-    // console.log(aboveLine2)
-    // console.log(aboveLine3)
-    // console.log(aboveLine4)
     const above1xor3 = (aboveLine1 && !aboveLine3) || (!aboveLine1 && aboveLine3)
     const above2xor4 = (aboveLine2 && !aboveLine4) || (!aboveLine2 && aboveLine4)
     return (above1xor3 && above2xor4)
