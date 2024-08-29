@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'black',
+        backgroundColor: 'white'
     },
     locationName: {
         textAlign: 'center',

@@ -1,8 +1,12 @@
 # Start react-native server
 npx react-native start
 
-# Building for a Release
-## Build for Android on a Local Phone
+# Build a Debug APK
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+
+cd android && ./gradlew assembleDebug
+
+# Build a Release APK
 Build for .apk
 cd android && ./gradlew assembleRelease && cd ..
 
