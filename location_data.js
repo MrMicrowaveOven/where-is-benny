@@ -30,13 +30,102 @@ export default locations = [
             [29.961688617838014, -90.06685952490557],
         ],
         image_url: ``
-    }
+    },
+    {
+        name: `Bourbon Pub`,
+        corners: [
+            [29.95961929034687, -90.06509060807514],
+            [29.959773823306207, -90.0649558270752],
+            [29.959644271255325, -90.06475734361258],
+            [29.959509490467116, -90.06489279516477],
+        ],
+        image_url: ``
+    },
+    {
+        name: `Oz`,
+        corners: [
+            [29.959492565629837, -90.06487299762966],
+            [29.95968369871042, -90.06469932460408],
+            [29.959596556014898, -90.0645209577136],
+            [29.959363594167023, -90.06471206509624],
+        ],
+        image_url: ``
+    },
+    {
+        name: `American Townhouse`,
+        corners: [
+            [29.963073439082528, -90.06599708717],
+            [29.963165226175516, -90.06590186875215],
+            [29.962925882438924, -90.06552032452842],
+            [29.962827704864228, -90.06561621349671],
+        ],
+        image_url: ``
+    },
+    {
+        name: `The Phoenix`,
+        corners: [
+            [29.96767900651459, -90.05664733343484],
+            [29.967692367312925, -90.05617995853764],
+            [29.967422827381686, -90.05614307816555],
+            [29.967381583060472, -90.05661984079384],
+        ],
+        image_url: ``
+    },
+    {
+        name: `Cafe Lafitte's in Exile`,
+        corners: [
+            [29.96036916733369, -90.06432271819499],
+            [29.96049058519145, -90.06421274762786],
+            [29.960405766990625, -90.06407997828464],
+            [29.960305844085855, -90.06420000713534],
+        ],
+        image_url: ``
+    },
+    {
+        name: `Crossing`,
+        corners: [
+            [],
+            [],
+            [],
+            [],
+        ],
+        image_url: ``
+    },
+    {
+        name: `Corner Pocket`,
+        corners: [
+            [],
+            [],
+            [],
+            [],
+        ],
+        image_url: ``
+    },
+    {
+        name: `Golden Lantern`,
+        corners: [
+            [],
+            [],
+            [],
+            [],
+        ],
+        image_url: ``
+    },
+    {
+        name: `Voodoo Lounge`,
+        corners: [
+            [],
+            [],
+            [],
+            [],
+        ],
+        image_url: ``
+    },
 ]
 
-const gpsLocation = [29.959905698993555, -90.06580675788258]
+const gpsLocation = [29.959637803569084, -90.0649313356797]
 
 const whereIsBenny = (gpsLocation) => {
-    // console.log(gpsLocation)
     bennysLocation = locations.find((location) => {
         // console.log(location.name)
         return isInLocation(location.corners, gpsLocation)
@@ -45,23 +134,32 @@ const whereIsBenny = (gpsLocation) => {
 }
 
 const isInLocation = (corners, gpsLocation) => {
-    const lats = corners.map((corner) => corner[0])
-    const maxLat = Math.max(...lats)
-    const minLat = Math.min(...lats)
-    const lngs = corners.map((corner) => corner[1])
-    const maxLng = Math.max(...lngs)
-    const minLng = Math.min(...lngs)
-    // console.log('minLat: ' + minLat)
-    // console.log('maxLat: ' + maxLat)
-    // console.log('minLng: ' + minLng)
-    // console.log('maxLng: ' + maxLng)
-    // console.log('gpsLat: ' + gpsLocation[0])
-    // console.log('gpsLng: ' + gpsLocation[1])
-    const isInLat = gpsLocation[0] < maxLat && gpsLocation[0] > minLat
-    // console.log(isInLat)
-    const isInLng = gpsLocation[1] < maxLng && gpsLocation[1] > minLng
-    // console.log(isInLng)
-    return (isInLat && isInLng)
+    const [corner1, corner2, corner3, corner4] = corners
+    const slope1 = getSlope(corner1, corner2)
+    const latAtGPSLng1 = corner1[1] + (corner1[0] - gpsLocation[0])*slope1
+    const aboveLine1 = latAtGPSLng1 > gpsLocation[1]
+    const slope2 = getSlope(corner2, corner3)
+    const latAtGPSLng2 = corner2[1] + (corner2[0] - gpsLocation[0])*slope2
+    const aboveLine2 = latAtGPSLng2 > gpsLocation[1]
+    const slope3 = getSlope(corner3, corner4)
+    const latAtGPSLng3 = corner3[1] + (corner3[0] - gpsLocation[0])*slope3
+    const aboveLine3 = latAtGPSLng3 > gpsLocation[1]
+    const slope4 = getSlope(corner4, corner1)
+    const latAtGPSLng4 = corner4[1] + (corner4[0] - gpsLocation[0])*slope4
+    const aboveLine4 = latAtGPSLng4 > gpsLocation[1]
+    // console.log(aboveLine1)
+    // console.log(aboveLine2)
+    // console.log(aboveLine3)
+    // console.log(aboveLine4)
+    const above1xor3 = (aboveLine1 && !aboveLine3) || (!aboveLine1 && aboveLine3)
+    const above2xor4 = (aboveLine2 && !aboveLine4) || (!aboveLine2 && aboveLine4)
+    return (above1xor3 && above2xor4)
 }
 
-console.log(whereIsBenny(gpsLocation))
+const getSlope = (point1, point2) => {
+    const numerator = point1[0] - point2[0]
+    const denominator = point1[1] - point2[1]
+    return numerator / denominator
+}
+
+// console.log(whereIsBenny(gpsLocation))
