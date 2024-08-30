@@ -41,21 +41,21 @@ const App = () => {
   //   }, 1000)
   // }, [])
 
-  // requestLocationPermission().then(() => {
-  if (hasLocationPermission) {
-    Geolocation.watchPosition(
-        (position) => {
-          console.log(position)
-          setCurrentLocation([position.coords.latitude, position.coords.longitude])
-        },
-        (error) => {
-          // See error code charts below.
-          console.log(error.code, error.message);
-        },
-        { enableHighAccuracy: true, interval: 5000 }
-    );
-  }
-  // })
+  requestLocationPermission().then(() => {
+    if (hasLocationPermission) {
+      Geolocation.watchPosition(
+          (position) => {
+            console.log(position)
+            setCurrentLocation([position.coords.latitude, position.coords.longitude])
+          },
+          (error) => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+          },
+          { enableHighAccuracy: true, interval: 5000 }
+      );
+    }
+  })
 
   return (
     <SafeAreaView style={styles.safeApp}>
