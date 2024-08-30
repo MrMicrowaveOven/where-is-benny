@@ -36,7 +36,7 @@ const Location = (name: string, index: number, corners: number[][], currentLocat
 const styles = StyleSheet.create({
     box: {
         width: '33%',
-        height: '25%',
+        height: '20%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

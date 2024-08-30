@@ -4,6 +4,7 @@ import {
   PermissionsAndroid,
   SafeAreaView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import locations from './location_data'
@@ -63,6 +64,7 @@ const App = () => {
           return Location(location.name, index, location.corners, currentLocation)
         })}
       </View>
+      <Text style={styles.locationText}>{`lat: ${currentLocation[0]}, lng: ${currentLocation[1]}`}</Text>
     </SafeAreaView>
   );
 }
@@ -70,6 +72,7 @@ const App = () => {
 const styles = StyleSheet.create({
   safeApp: {
     width: "100%",
+    height: '100%'
   },
   app: {
     width: "100%",
@@ -79,6 +82,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     flexWrap: "wrap"
+  },
+  locationText: {
+    position: 'absolute',
+    fontSize: 30,
+    bottom: 10,
+    left: 10
   }
 });
 
