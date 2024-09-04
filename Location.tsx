@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native"
 
-const Location = (name: string, index: number, corners: number[][], currentLocation: number[]) => {
+const Location = (name: string, index: number, corners: number[][], addresses: string[], currentLocation: number[], currentAddress: string) => {
     const isInLocation = (corners: number[][], currentLocation: number[]) => {
         const [corner1, corner2, corner3, corner4] = corners
         const slope1 = getSlope(corner1, corner2)
@@ -17,7 +17,20 @@ const Location = (name: string, index: number, corners: number[][], currentLocat
         const aboveLine4 = latAtGPSLng4 > currentLocation[1]
         const above1xor3 = (aboveLine1 && !aboveLine3) || (!aboveLine1 && aboveLine3)
         const above2xor4 = (aboveLine2 && !aboveLine4) || (!aboveLine2 && aboveLine4)
-        return (above1xor3 && above2xor4)
+        let matchesAddress = false
+        if (!(above1xor3 && above2xor4)) {
+            matchesAddress = checkIfAddressMatches()
+        }
+        return ((above1xor3 && above2xor4) || matchesAddress)
+    }
+
+    const checkIfAddressMatches = () => {
+        let doesMatch = false
+        addresses.forEach((address) => {
+            const shortCurrentAddress = currentAddress.substring(0, address.length)
+            if (shortCurrentAddress === address) doesMatch = true
+        })
+        return doesMatch
     }
 
     const getSlope = (point1: number[], point2: number[]) => {

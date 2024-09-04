@@ -9,7 +9,10 @@ export default locations = [
             [29.959971607992603, -90.06564075239784],
             [29.959882141749905, -90.06574133523361],
         ],
-        image_url: ''
+        image_url: '',
+        addresses: [
+
+        ]
     },
     {
         name: `Raw Hide`,
@@ -19,7 +22,10 @@ export default locations = [
             [29.960605741009847, -90.06656448192282],
             [29.9604506283976, -90.06672005004216],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `GrandPre's`,
@@ -29,7 +35,10 @@ export default locations = [
             [29.961754844899676, -90.06682197398021],
             [29.961688617838014, -90.06685952490557],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `Bourbon Pub`,
@@ -39,7 +48,10 @@ export default locations = [
             [29.959644271255325, -90.06475734361258],
             [29.959509490467116, -90.06489279516477],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `Oz`,
@@ -49,7 +61,10 @@ export default locations = [
             [29.959596556014898, -90.0645209577136],
             [29.959363594167023, -90.06471206509624],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `American Townhouse`,
@@ -59,7 +74,10 @@ export default locations = [
             [29.962925882438924, -90.06552032452842],
             [29.962827704864228, -90.06561621349671],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `The Phoenix`,
@@ -69,7 +87,10 @@ export default locations = [
             [29.967422827381686, -90.05614307816555],
             [29.967381583060472, -90.05661984079384],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `Cafe Lafitte's in Exile`,
@@ -79,7 +100,10 @@ export default locations = [
             [29.960405766990625, -90.06407997828464],
             [29.960305844085855, -90.06420000713534],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `Crossing`,
@@ -89,7 +113,10 @@ export default locations = [
             [],
             [],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `Corner Pocket`,
@@ -99,7 +126,10 @@ export default locations = [
             [],
             [],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
         name: `Golden Lantern`,
@@ -109,17 +139,23 @@ export default locations = [
             [],
             [],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+
+        ]
     },
     {
-        name: `Voodoo Lounge`,
+        name: `Home`,
         corners: [
             [],
             [],
             [],
             [],
         ],
-        image_url: ``
+        image_url: ``,
+        addresses: [
+            '1620 Carol Sue'
+        ]
     },
 ]
 
@@ -157,5 +193,3 @@ const getSlope = (point1, point2) => {
     const denominator = point1[1] - point2[1]
     return numerator / denominator
 }
-
-// console.log(whereIsBenny(gpsLocation))

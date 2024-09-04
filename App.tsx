@@ -13,11 +13,12 @@ import Geolocation from 'react-native-geolocation-service';
 const App = () => {
   const [hasLocationPermission, setHasLocationPermission] = useState(false)
   const [currentLocation, setCurrentLocation] = useState<number[]>([0,0])
+  const [currentAddress, setCurrentAddress] = useState<string>('')
 
   const requestLocationPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         {
           title: 'Grant Location Data',
           message: 'Can I track your location?',
@@ -40,12 +41,13 @@ const App = () => {
   //       requestLocationPermission()
   //   }, 1000)
   // }, [])
+  useEffect(() => {getAddressFromCoordinates()}, [currentLocation])
 
   requestLocationPermission().then(() => {
     if (hasLocationPermission) {
       Geolocation.watchPosition(
           (position) => {
-            console.log(position)
+            // console.log(position)
             setCurrentLocation([position.coords.latitude, position.coords.longitude])
           },
           (error) => {
@@ -57,14 +59,41 @@ const App = () => {
     }
   })
 
+  const getAddressFromCoordinates = async () => {
+    const [latitude, longitude] = currentLocation
+    // return new Promise((resolve, reject) => {
+    const api_key=process.env.API_KEY
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCImatc1osZtAC_G4zLOZp8tgCymhTiKUs&latlng=${latitude},${longitude}&key=${api_key}`;
+
+    const result = await fetch(url)
+    const resultJson = await result.json()
+    // console.log("=========")
+    // console.log(resultJson)
+    // console.log(resultJson?.results?.[0]?.formatted_address)
+    setCurrentAddress(resultJson.results[0].formatted_address)
+        // .then(res => res.json())
+        // .then(resJson => {
+        //   if (resJson.results[0].formatted_address) {
+        //     resolve(resJson.results[0].formatted_address);
+        //   } else {
+        //     reject('not found');
+        //   }
+        // })
+        // .catch(e => {
+        //   reject(e);
+        // });
+    // });
+  }
+
   return (
     <SafeAreaView style={styles.safeApp}>
       <View style={styles.app}>
         {locations.map((location, index) => {
-          return Location(location.name, index, location.corners, currentLocation)
+          return Location(location.name, index, location.corners, location.addresses, currentLocation, currentAddress)
         })}
       </View>
       <Text style={styles.locationText}>{`lat: ${currentLocation[0]}, lng: ${currentLocation[1]}`}</Text>
+      <Text style={styles.addressText}>{currentAddress}</Text>
     </SafeAreaView>
   );
 }
@@ -84,6 +113,12 @@ const styles = StyleSheet.create({
     flexWrap: "wrap"
   },
   locationText: {
+    position: 'absolute',
+    fontSize: 30,
+    bottom: 80,
+    left: 10
+  },
+  addressText: {
     position: 'absolute',
     fontSize: 30,
     bottom: 10,
