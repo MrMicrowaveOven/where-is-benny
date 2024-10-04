@@ -21,7 +21,7 @@ const App = () => {
 
   const [tapHistory, setTapHistory] = useState<number[]>([])
   const [userModalOpen, setUserModalOpen] = useState<boolean>(false)
-  const [userName, setUserName] = useState<string>('Benny')
+  const [userName, setUserName] = useState<string>('')
 
   useEffect(() => {
     if(tapHistory.length > 7) {
@@ -104,7 +104,7 @@ const App = () => {
       <Text style={styles.addressText}>{currentAddress}</Text>
       <Modal visible={userModalOpen}>
         <Text>Set User Name</Text>
-        <TextInput onChangeText={(val) => setUserName(val)}/>
+        <TextInput onChangeText={(val) => setUserName(val)} value={userName}/>
         <Button title={'Close'} onPress={() => setUserModalOpen(false)}/>
       </Modal>
     </SafeAreaView>
