@@ -54,7 +54,7 @@ const App = () => {
             // See error code charts below.
             console.log(error.code, error.message);
           },
-          { enableHighAccuracy: true, interval: 5000 }
+          { enableHighAccuracy: true, interval: 15000 }
       );
     }
   })
