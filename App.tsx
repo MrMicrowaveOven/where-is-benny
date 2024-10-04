@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Location from './Location'
 import {
+  Button,
+  Modal,
   PermissionsAndroid,
   SafeAreaView,
   StyleSheet,
   Text,
+  TextInput,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import locations from './location_data'
@@ -14,6 +18,21 @@ const App = () => {
   const [hasLocationPermission, setHasLocationPermission] = useState(false)
   const [currentLocation, setCurrentLocation] = useState<number[]>([0,0])
   const [currentAddress, setCurrentAddress] = useState<string>('')
+
+  const [tapHistory, setTapHistory] = useState<number[]>([])
+  const [userModalOpen, setUserModalOpen] = useState<boolean>(false)
+  const [userName, setUserName] = useState<string>('Benny')
+
+  useEffect(() => {
+    if(tapHistory.length > 7) {
+      setTapHistory(tapHistory.slice(tapHistory.length - 7))
+    }
+    if(tapHistory.join() === [0,1,2,4,6,7,8].join()) {
+      setUserModalOpen(true)
+    } else {
+      setUserModalOpen(false)
+    }
+  }, [tapHistory])
 
   const requestLocationPermission = async () => {
     try {
@@ -74,11 +93,20 @@ const App = () => {
     <SafeAreaView style={styles.safeApp}>
       <View style={styles.app}>
         {locations.map((location, index) => {
-          return Location(location.name, index, location.corners, location.addresses, currentLocation, currentAddress)
+          return (
+            <TouchableWithoutFeedback onPress={() => setTapHistory(tapHistory.concat(index))}>
+              {Location(location.name, index, location.corners, location.addresses, currentLocation, currentAddress)}
+            </TouchableWithoutFeedback>
+          )
         })}
       </View>
       <Text style={styles.locationText}>{`lat: ${currentLocation[0]}, lng: ${currentLocation[1]}`}</Text>
       <Text style={styles.addressText}>{currentAddress}</Text>
+      <Modal visible={userModalOpen}>
+        <Text>Set User Name</Text>
+        <TextInput onChangeText={(val) => setUserName(val)}/>
+        <Button title={'Close'} onPress={() => setUserModalOpen(false)}/>
+      </Modal>
     </SafeAreaView>
   );
 }
