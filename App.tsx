@@ -61,28 +61,14 @@ const App = () => {
 
   const getAddressFromCoordinates = async () => {
     const [latitude, longitude] = currentLocation
-    // return new Promise((resolve, reject) => {
     const api_key=process.env.API_KEY
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCImatc1osZtAC_G4zLOZp8tgCymhTiKUs&latlng=${latitude},${longitude}&key=${api_key}`;
+
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${api_key}`;
 
     const result = await fetch(url)
     const resultJson = await result.json()
-    // console.log("=========")
-    // console.log(resultJson)
-    // console.log(resultJson?.results?.[0]?.formatted_address)
+
     setCurrentAddress(resultJson.results[0].formatted_address)
-        // .then(res => res.json())
-        // .then(resJson => {
-        //   if (resJson.results[0].formatted_address) {
-        //     resolve(resJson.results[0].formatted_address);
-        //   } else {
-        //     reject('not found');
-        //   }
-        // })
-        // .catch(e => {
-        //   reject(e);
-        // });
-    // });
   }
 
   return (
