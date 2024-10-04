@@ -11,7 +11,7 @@ export default locations = [
         ],
         image_url: '',
         addresses: [
-
+            '740 Dauphine'
         ]
     },
     {
@@ -24,7 +24,7 @@ export default locations = [
         ],
         image_url: ``,
         addresses: [
-
+            '740 Burgundy'
         ]
     },
     {
@@ -37,7 +37,8 @@ export default locations = [
         ],
         image_url: ``,
         addresses: [
-
+            '834 N Rampart',
+            '834 Rampart'
         ]
     },
     {
@@ -50,7 +51,7 @@ export default locations = [
         ],
         image_url: ``,
         addresses: [
-
+            '801 Bourbon'
         ]
     },
     {
@@ -63,7 +64,7 @@ export default locations = [
         ],
         image_url: ``,
         addresses: [
-
+            '800 Bourbon'
         ]
     },
     {
@@ -76,7 +77,8 @@ export default locations = [
         ],
         image_url: ``,
         addresses: [
-
+            '1012 N Rampart',
+            '1012 Rampart'
         ]
     },
     {
@@ -89,7 +91,7 @@ export default locations = [
         ],
         image_url: ``,
         addresses: [
-
+            '941 Elysian Fields'
         ]
     },
     {
@@ -102,55 +104,56 @@ export default locations = [
         ],
         image_url: ``,
         addresses: [
-
+            '901 Bourbon'
         ]
     },
     {
         name: `Crossing`,
         corners: [
-            [],
-            [],
-            [],
-            [],
+            [29.95761937253091, -90.06829908527257],
+            [29.957764032240963, -90.06817637421636],
+            [29.957639706237785, -90.06796917358044],
+            [29.957488074780496, -90.06810529568105],
         ],
         image_url: ``,
         addresses: [
-
+            '439 Dauphine'
         ]
     },
     {
         name: `Corner Pocket`,
         corners: [
-            [],
-            [],
-            [],
-            [],
+            [29.958246810724003, -90.06888112463712],
+            [29.958122485324626, -90.06871616879104],
+            [29.95791856808473, -90.0688797835324],
+            [29.958037665093237, -90.0690735731239],
         ],
         image_url: ``,
         addresses: [
-
+            '940 St Louis',
+            '940 St. Louis',
         ]
     },
     {
         name: `Golden Lantern`,
         corners: [
-            [],
-            [],
-            [],
-            [],
+            [29.96280259036187, -90.06065277784498],
+            [29.96280259036187, -90.06065277784498],
+            [29.962603911138977, -90.06064070790502],
+            [29.9626974414659, -90.06078688828894],
         ],
         image_url: ``,
         addresses: [
-
+            '1239 Royal'
         ]
     },
     {
         name: `Home`,
         corners: [
-            [],
-            [],
-            [],
-            [],
+            [29.899786294552253, -90.04100268456881],
+            [29.899775831137436, -90.0397621629394],
+            [29.898901550792253, -90.03976216294674],
+            [29.89898177098344, -90.04090880727362],
         ],
         image_url: ``,
         addresses: [
