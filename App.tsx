@@ -47,7 +47,6 @@ const App = () => {
     if (hasLocationPermission) {
       Geolocation.watchPosition(
           (position) => {
-            // console.log(position)
             setCurrentLocation([position.coords.latitude, position.coords.longitude])
           },
           (error) => {
