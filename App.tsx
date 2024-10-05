@@ -180,7 +180,7 @@ const App = () => {
       <Modal visible={userModalOpen}>
         <Text style={{color: 'black'}}>Set User Name</Text>
         <TextInput style={{color: 'black'}} onChangeText={(val) => setUserName(val)} value={userName}/>
-        <Button title={'Close'} onPress={() => {setUserModalOpen(false); refreshFromServer()}}/>
+        <Button title={'Close'} onPress={() => {setUserModalOpen(false); refreshFromServer(); setTapHistory([]);}}/>
       </Modal>
       {appLoading && <Text style={styles.loadingText}>Loading...</Text>}
     </SafeAreaView>
