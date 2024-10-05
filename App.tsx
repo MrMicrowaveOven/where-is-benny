@@ -11,13 +11,30 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import locations from './location_data'
+// import locations from './location_data'
 import Geolocation from 'react-native-geolocation-service';
+
+type Location = {
+  name: string;
+  image_url: string;
+  corners: number[][];
+  // lat1: number;
+  // lng1: number;
+  // lat2: number;
+  // lng2: number;
+  // lat3: number;
+  // lng3: number;
+  // lat4: number;
+  // lng4: number;
+  addresses: string[];
+}
 
 const App = () => {
   const [hasLocationPermission, setHasLocationPermission] = useState(false)
   const [currentLocation, setCurrentLocation] = useState<number[]>([0,0])
   const [currentAddress, setCurrentAddress] = useState<string>('')
+
+  const [locations, setLocations] = useState<Location[]>([])
 
   const [tapHistory, setTapHistory] = useState<number[]>([])
   const [userModalOpen, setUserModalOpen] = useState<boolean>(false)
@@ -33,6 +50,30 @@ const App = () => {
       setUserModalOpen(false)
     }
   }, [tapHistory])
+
+  
+  useEffect(() => {
+    const callServer = async () => {
+      const locations_raw = await fetch('https://wheres-benny-server-3fb5049d2775.herokuapp.com/locations')
+      const locations_from_server = await locations_raw.json()
+      // locations.forEach((location: any) => console.log(location.name))
+      setLocations(locations_from_server.map((location: any) => {
+        return {
+          name: location.name,
+          corners: [
+            [location.lat1, location.lng1],
+            [location.lat2, location.lng2],
+            [location.lat3, location.lng3],
+            [location.lat4, location.lng4],
+          ],
+          addresses: location.addresses,
+          image_url: location.image_url
+        }
+      }))
+    }
+    callServer()
+  }, [])
+  console.log(locations)
 
   const requestLocationPermission = async () => {
     try {
