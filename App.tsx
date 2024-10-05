@@ -55,12 +55,13 @@ const App = () => {
   }, [tapHistory])
 
   useEffect(() => {
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       callServer()
       if(userName && !userModalOpen) {
         getPermissionAndSendLocation()
       }
     }, 15000)
+    return () => clearInterval(intervalId)
   }, [])
 
   const callServer = async () => {
