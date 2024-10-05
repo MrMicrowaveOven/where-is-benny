@@ -1,0 +1,9 @@
+User:
+- Receives Locations and SuperUser locations
+
+SuperUser:
+- Receives Locations and SuperUser locations
+- Sends location
+
+Mothership:
+- Receives Superuser location, calculates their Location and Address, sends to Users
