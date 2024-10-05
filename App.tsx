@@ -94,7 +94,7 @@ const App = () => {
       <View style={styles.app}>
         {locations.map((location, index) => {
           return (
-            <TouchableWithoutFeedback onPress={() => setTapHistory(tapHistory.concat(index))}>
+            <TouchableWithoutFeedback key={index} onPress={() => setTapHistory(tapHistory.concat(index))}>
               {Location(location.name, index, location.corners, location.addresses, currentLocation, currentAddress)}
             </TouchableWithoutFeedback>
           )
