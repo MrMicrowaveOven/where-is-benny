@@ -165,8 +165,8 @@ const App = () => {
       <Text style={styles.locationText}>{`lat: ${currentLocation[0]}, lng: ${currentLocation[1]}`}</Text>
       <Text style={styles.addressText}>{currentAddress}</Text>
       <Modal visible={userModalOpen}>
-        <Text>Set User Name</Text>
-        <TextInput onChangeText={(val) => setUserName(val)} value={userName}/>
+        <Text style={{color: 'black'}}>Set User Name</Text>
+        <TextInput style={{color: 'black'}} onChangeText={(val) => setUserName(val)} value={userName}/>
         <Button title={'Close'} onPress={() => setUserModalOpen(false)}/>
       </Modal>
     </SafeAreaView>
