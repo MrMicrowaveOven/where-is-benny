@@ -27,6 +27,7 @@ type Location = {
   // lat4: number;
   // lng4: number;
   addresses: string[];
+  humans: string[]
 }
 
 const App = () => {
@@ -68,7 +69,8 @@ const App = () => {
             [location.lat4, location.lng4],
           ],
           addresses: location.addresses,
-          image_url: location.image_url
+          image_url: location.image_url,
+          humans: location.humans
         }
       }))
     }
@@ -157,7 +159,7 @@ const App = () => {
         {locations.map((location, index) => {
           return (
             <TouchableWithoutFeedback key={index} onPress={() => setTapHistory(tapHistory.concat(index))}>
-              {Location(location.name, index, location.corners, location.addresses, currentLocation, currentAddress)}
+              {Location(location.name, index, location.humans)}
             </TouchableWithoutFeedback>
           )
         })}
