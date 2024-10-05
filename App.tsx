@@ -58,13 +58,17 @@ const App = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      callServer()
-      if(userName && !userModalOpen) {
-        getPermissionAndSendLocation()
-      }
+      refreshFromServer()
     }, 15000)
     return () => clearInterval(intervalId)
   }, [])
+
+  const refreshFromServer = () => {
+    callServer()
+    if(userName && !userModalOpen) {
+      getPermissionAndSendLocation()
+    }
+  }
 
   const callServer = async () => {
     setAppLoading(true)
@@ -111,10 +115,11 @@ const App = () => {
   };
 
   useEffect(() => {getAddressFromCoordinates()}, [currentLocation])
+
   const getPermissionAndSendLocation = () => {
     requestLocationPermission().then(() => {
       if (hasLocationPermission) {
-        Geolocation.watchPosition(
+        Geolocation.getCurrentPosition(
             (position) => {
               setCurrentLocation([position.coords.latitude, position.coords.longitude])
               sendCurrentLocation([position.coords.latitude, position.coords.longitude])
@@ -123,7 +128,7 @@ const App = () => {
               // See error code charts below.
               console.log(error.code, error.message);
             },
-            { enableHighAccuracy: true, interval: 15000 }
+            { enableHighAccuracy: true }
         );
       }
     })
@@ -175,7 +180,7 @@ const App = () => {
       <Modal visible={userModalOpen}>
         <Text style={{color: 'black'}}>Set User Name</Text>
         <TextInput style={{color: 'black'}} onChangeText={(val) => setUserName(val)} value={userName}/>
-        <Button title={'Close'} onPress={() => setUserModalOpen(false)}/>
+        <Button title={'Close'} onPress={() => {setUserModalOpen(false); refreshFromServer()}}/>
       </Modal>
       {appLoading && <Text style={styles.loadingText}>Loading...</Text>}
     </SafeAreaView>
