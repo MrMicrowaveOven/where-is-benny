@@ -126,8 +126,9 @@ const App = () => {
 
     const result = await fetch(url)
     const resultJson = await result.json()
-
-    setCurrentAddress(resultJson.results[0].formatted_address)
+    if (resultJson?.results?.[0]?.formattedAddress) {
+      setCurrentAddress(resultJson.results[0].formatted_address)
+    }
   }
 
   return (
