@@ -9,7 +9,7 @@ export default locations = [
             [29.959971607992603, -90.06564075239784],
             [29.959882141749905, -90.06574133523361],
         ],
-        image_url: '',
+        image_url: 'https://wheres-benny-store.s3.us-west-1.amazonaws.com/good_friends_bar.webp',
         addresses: [
             '740 Dauphine'
         ]
@@ -22,7 +22,7 @@ export default locations = [
             [29.960605741009847, -90.06656448192282],
             [29.9604506283976, -90.06672005004216],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/raw_hide.jpeg`,
         addresses: [
             '740 Burgundy'
         ]
@@ -35,7 +35,7 @@ export default locations = [
             [29.961754844899676, -90.06682197398021],
             [29.961688617838014, -90.06685952490557],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/grand_pres.jpeg`,
         addresses: [
             '834 N Rampart',
             '834 Rampart'
@@ -49,7 +49,7 @@ export default locations = [
             [29.959644271255325, -90.06475734361258],
             [29.959509490467116, -90.06489279516477],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/burbon_pub.jpg`,
         addresses: [
             '801 Bourbon'
         ]
@@ -62,7 +62,7 @@ export default locations = [
             [29.959596556014898, -90.0645209577136],
             [29.959363594167023, -90.06471206509624],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/oz.jpg`,
         addresses: [
             '800 Bourbon'
         ]
@@ -75,7 +75,7 @@ export default locations = [
             [29.962925882438924, -90.06552032452842],
             [29.962827704864228, -90.06561621349671],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/american_townhouse.png`,
         addresses: [
             '1012 N Rampart',
             '1012 Rampart'
@@ -89,7 +89,7 @@ export default locations = [
             [29.967422827381686, -90.05614307816555],
             [29.967381583060472, -90.05661984079384],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/phoenix.png`,
         addresses: [
             '941 Elysian Fields'
         ]
@@ -102,7 +102,7 @@ export default locations = [
             [29.960405766990625, -90.06407997828464],
             [29.960305844085855, -90.06420000713534],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/cafe_lafitte.jpg`,
         addresses: [
             '901 Bourbon'
         ]
@@ -115,7 +115,7 @@ export default locations = [
             [29.957639706237785, -90.06796917358044],
             [29.957488074780496, -90.06810529568105],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/crossing.jpeg`,
         addresses: [
             '439 Dauphine'
         ]
@@ -128,7 +128,7 @@ export default locations = [
             [29.95791856808473, -90.0688797835324],
             [29.958037665093237, -90.0690735731239],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/corner_pocket.png`,
         addresses: [
             '940 St Louis',
             '940 St. Louis',
@@ -142,7 +142,7 @@ export default locations = [
             [29.962603911138977, -90.06064070790502],
             [29.9626974414659, -90.06078688828894],
         ],
-        image_url: ``,
+        image_url: `https://wheres-benny-store.s3.us-west-1.amazonaws.com/golden_lantern.jpeg`,
         addresses: [
             '1239 Royal'
         ]
