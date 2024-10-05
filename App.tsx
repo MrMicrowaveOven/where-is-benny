@@ -103,20 +103,40 @@ const App = () => {
   // }, [])
   useEffect(() => {getAddressFromCoordinates()}, [currentLocation])
 
-  requestLocationPermission().then(() => {
-    if (hasLocationPermission) {
-      Geolocation.watchPosition(
-          (position) => {
-            setCurrentLocation([position.coords.latitude, position.coords.longitude])
-          },
-          (error) => {
-            // See error code charts below.
-            console.log(error.code, error.message);
-          },
-          { enableHighAccuracy: true, interval: 15000 }
-      );
-    }
-  })
+  if (userName) {
+    requestLocationPermission().then(() => {
+      if (hasLocationPermission) {
+        Geolocation.watchPosition(
+            (position) => {
+              setCurrentLocation([position.coords.latitude, position.coords.longitude])
+              sendCurrentLocation([position.coords.latitude, position.coords.longitude])
+            },
+            (error) => {
+              // See error code charts below.
+              console.log(error.code, error.message);
+            },
+            { enableHighAccuracy: true, interval: 15000 }
+        );
+      }
+    })
+  }
+
+  const sendCurrentLocation = async (location: number[]) => {
+    await fetch('https://wheres-benny-server-3fb5049d2775.herokuapp.com/humans', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: userName,
+        lat: location[0],
+        lng: location[1]
+      }),
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
   const getAddressFromCoordinates = async () => {
     const [latitude, longitude] = currentLocation
