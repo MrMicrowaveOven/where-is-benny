@@ -41,6 +41,8 @@ const App = () => {
   const [userModalOpen, setUserModalOpen] = useState<boolean>(false)
   const [userName, setUserName] = useState<string>('')
 
+  const [appLoading, setAppLoading] = useState<boolean>(false)
+
   const [serverUrl, setServerUrl] = useState<string|undefined>(process.env.SERVER_URL)
 
   useEffect(() => {
@@ -65,6 +67,7 @@ const App = () => {
   }, [])
 
   const callServer = async () => {
+    setAppLoading(true)
     const locations_raw = await fetch(serverUrl + '/locations')
     const locations_from_server = await locations_raw.json()
     // locations.forEach((location: any) => console.log(location.name))
@@ -82,6 +85,7 @@ const App = () => {
         humans: location.humans
       }
     }))
+    setAppLoading(false)
   }
 
   const requestLocationPermission = async () => {
@@ -173,6 +177,7 @@ const App = () => {
         <TextInput style={{color: 'black'}} onChangeText={(val) => setUserName(val)} value={userName}/>
         <Button title={'Close'} onPress={() => setUserModalOpen(false)}/>
       </Modal>
+      {appLoading && <Text style={styles.loadingText}>Loading...</Text>}
     </SafeAreaView>
   );
 }
@@ -202,6 +207,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     bottom: 10,
     left: 10
+  },
+  loadingText: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    fontSize: 20,
+    color: 'black'
   }
 });
 
