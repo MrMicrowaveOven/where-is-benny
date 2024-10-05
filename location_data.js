@@ -166,7 +166,6 @@ export default locations = [
 
 const whereIsBenny = (gpsLocation) => {
     bennysLocation = locations.find((location) => {
-        // console.log(location.name)
         return isInLocation(location.corners, gpsLocation)
     })
     return bennysLocation

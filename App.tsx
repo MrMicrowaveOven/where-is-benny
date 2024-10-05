@@ -73,7 +73,6 @@ const App = () => {
     }
     callServer()
   }, [])
-  console.log(locations)
 
   const requestLocationPermission = async () => {
     try {
