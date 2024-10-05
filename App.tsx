@@ -41,7 +41,7 @@ const App = () => {
   const [userModalOpen, setUserModalOpen] = useState<boolean>(false)
   const [userName, setUserName] = useState<string>('')
 
-  const [serverUrl, setServerUrl] = useState<string>(process.env.SERVER_URL ? process.env.SERVER_URL : '')
+  const [serverUrl, setServerUrl] = useState<string|undefined>(process.env.SERVER_URL)
 
   useEffect(() => {
     if(tapHistory.length > 7) {
@@ -56,7 +56,7 @@ const App = () => {
 
   useEffect(() => {
     const callServer = async () => {
-      const locations_raw = await fetch(serverUrl)
+      const locations_raw = await fetch(serverUrl + '/locations')
       const locations_from_server = await locations_raw.json()
       // locations.forEach((location: any) => console.log(location.name))
       setLocations(locations_from_server.map((location: any) => {
@@ -124,7 +124,7 @@ const App = () => {
   }
 
   const sendCurrentLocation = async (location: number[]) => {
-    await fetch('https://wheres-benny-server-3fb5049d2775.herokuapp.com/humans', {
+    await fetch(serverUrl + '/humans', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
