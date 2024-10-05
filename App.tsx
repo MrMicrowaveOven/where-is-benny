@@ -55,27 +55,33 @@ const App = () => {
   }, [tapHistory])
 
   useEffect(() => {
-    const callServer = async () => {
-      const locations_raw = await fetch(serverUrl + '/locations')
-      const locations_from_server = await locations_raw.json()
-      // locations.forEach((location: any) => console.log(location.name))
-      setLocations(locations_from_server.map((location: any) => {
-        return {
-          name: location.name,
-          corners: [
-            [location.lat1, location.lng1],
-            [location.lat2, location.lng2],
-            [location.lat3, location.lng3],
-            [location.lat4, location.lng4],
-          ],
-          addresses: location.addresses,
-          image_url: location.image_url,
-          humans: location.humans
-        }
-      }))
-    }
-    callServer()
+    setInterval(() => {
+      callServer()
+      if(userName && !userModalOpen) {
+        getPermissionAndSendLocation()
+      }
+    }, 15000)
   }, [])
+
+  const callServer = async () => {
+    const locations_raw = await fetch(serverUrl + '/locations')
+    const locations_from_server = await locations_raw.json()
+    // locations.forEach((location: any) => console.log(location.name))
+    setLocations(locations_from_server.map((location: any) => {
+      return {
+        name: location.name,
+        corners: [
+          [location.lat1, location.lng1],
+          [location.lat2, location.lng2],
+          [location.lat3, location.lng3],
+          [location.lat4, location.lng4],
+        ],
+        addresses: location.addresses,
+        image_url: location.image_url,
+        humans: location.humans
+      }
+    }))
+  }
 
   const requestLocationPermission = async () => {
     try {
@@ -98,14 +104,9 @@ const App = () => {
       console.warn(err);
     }
   };
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //       requestLocationPermission()
-  //   }, 1000)
-  // }, [])
-  useEffect(() => {getAddressFromCoordinates()}, [currentLocation])
 
-  if (userName) {
+  useEffect(() => {getAddressFromCoordinates()}, [currentLocation])
+  const getPermissionAndSendLocation = () => {
     requestLocationPermission().then(() => {
       if (hasLocationPermission) {
         Geolocation.watchPosition(
