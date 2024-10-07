@@ -44,6 +44,7 @@ const App = () => {
   const [appLoading, setAppLoading] = useState<boolean>(false)
 
   const [serverUrl, setServerUrl] = useState<string|undefined>(process.env.SERVER_URL)
+  const [errorLog, setErrorLog] = useState<string>("Error log")
 
   useEffect(() => {
     if(tapHistory.length > 7) {
@@ -66,7 +67,9 @@ const App = () => {
 
   const refreshFromServer = () => {
     callServer()
+    // setErrorLog(userName && !userModalOpen ? )
     if(userName && !userModalOpen) {
+      setErrorLog("About to getPermission")
       getPermissionAndSendLocation()
     }
   }
@@ -119,9 +122,11 @@ const App = () => {
 
   const getPermissionAndSendLocation = () => {
     requestLocationPermission().then(() => {
+      setErrorLog("Permission obtained")
       if (hasLocationPermission) {
         Geolocation.getCurrentPosition(
             (position) => {
+              setErrorLog("Permission obtained!  Setting and sending")
               setCurrentLocation([position.coords.latitude, position.coords.longitude])
               sendCurrentLocation([position.coords.latitude, position.coords.longitude])
             },
@@ -177,7 +182,9 @@ const App = () => {
         })}
       </View>
       <Text style={styles.locationText}>{`lat: ${currentLocation[0]}, lng: ${currentLocation[1]}`}</Text>
-      <Text style={styles.addressText}>{currentAddress}</Text>
+      {/* <Text style={styles.addressText}>{currentAddress}</Text> */}
+      {/* <Text style={styles.locationText}>serverUrl</Text> */}
+      {/* <Text style={styles.locationText}>{errorLog}</Text> */}
       <Modal visible={userModalOpen}>
         <Text style={{color: 'black'}}>Set User Name</Text>
         <TextInput style={{color: 'black'}} onChangeText={(val) => setUserName(val)} value={userName}/>
@@ -206,7 +213,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     fontSize: 30,
     bottom: 80,
-    left: 10
+    left: 10,
+    color: 'red',
   },
   addressText: {
     position: 'absolute',
