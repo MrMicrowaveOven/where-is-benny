@@ -57,6 +57,7 @@ const App = () => {
   }, [tapHistory])
 
   useEffect(() => {
+    refreshFromServer()
     const intervalId = setInterval(() => {
       refreshFromServer()
     }, 15000)
